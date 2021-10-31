@@ -8,12 +8,7 @@ function App() {
   // cuando se monta 
 
   useEffect( ()=> {
-    axios.get(appStateUrl, 
-      {
-        headers:{
-          'Access-Control-Allow-Origin': '*'
-        }
-      })
+    axios.get(appStateUrl)
     .then( res => {
       setState(res.data)
       console.log(res.data)
@@ -28,7 +23,8 @@ function App() {
     <div className="App">
       <h1> Hello world</h1>
       El estado leído es: 
-      {state}
+      View: {state?.view} <br/>
+      Select: {state?.select}
     </div>
   );
 }
