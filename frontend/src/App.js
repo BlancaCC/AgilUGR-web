@@ -27,14 +27,7 @@ function App() {
 
 
   return (
-    <div className="App">
-      <h1> Página debugeo de state</h1>
-
-      Peticiones desde que se lanzó la página al backend :{recarga} <br/>
-      <h2> La información que contiene el estado </h2>
-      View: {state?.view} <br/>
-      Select: {state?.select}
-    </div>
+  <h2> Working on provider</h2>
   );
 }
 
