@@ -1,0 +1,1 @@
+export const appStateUrl = 'http://localhost:8000/'
