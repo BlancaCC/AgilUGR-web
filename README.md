@@ -65,3 +65,11 @@ como por ejemplo:
 `http://localhost:8000/view/home`
 
 (Ver foto put-example)
+
+## Cómo levantar el Frontend
+
+```
+cd frontend
+npm start
+npm start  #  Starts the development server.
+```
