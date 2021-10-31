@@ -9,6 +9,14 @@ const  state = {
   view: 'home', 
   select: 'blabla'
 }
+// para que permita las referencias cruzadas 
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Methods", "GET, PUT, POST");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
 // cuando se pregunta por raiz se devuelve el estado actual de la app
 app.get('/', (req, res) => {
   res.send(state)
