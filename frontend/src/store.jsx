@@ -1,4 +1,4 @@
-import React, {createContext, useMemo, useState} from "react";
+import {createContext} from "react";
 import { initialStore, ActionTypes} from "./gestor";
 
 export const Store = createContext(initialStore)
