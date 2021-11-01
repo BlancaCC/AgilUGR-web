@@ -1,25 +1,22 @@
 import React, {createContext, useMemo, useState} from "react";
-import { gestorValorInicial } from "./gestor";
+import { initialStore, ActionTypes} from "./gestor";
 
-export const store = createContext(gestorValorInicial)
-const {Provider} = store
+export const Store = createContext(initialStore)
 
-export const StateProvider = ({children}) => {
-    const [state, dispatch] = useState(gestorValorInicial)
-
-    // getters 
-    const getters = useMemo( () =>
-
-    )
-
-    // Los estados, dispathc (lo que lo actualizan)
-    // los getters de la base de datos se actualizan solo si cambian
-    const value = useMemo (() => (
-        {state, dispatch, getters}
-    ), [state, dispatch, getters])
-    return (
-        <Provider value={value}>
-            {children}
-        </Provider>
-    )
+/**
+ * 
+ * @param {*} state 
+ * @param {*} action : tipo de mensaje que se envía. 
+ * Tipo: 'Actualiza vista' por ejemplo. 
+ * vista: 
+ */
+export const storeReducer = ( state , action ) => {
+    switch ( action.type) {
+        case ActionTypes.actualizaVista:
+            return {...state, view: action.view}
+        case ActionTypes.sumaContador:
+            return {...state, counter: state.counter +1}
+        default:
+            throw new Error()
+    }
 }

@@ -7,7 +7,7 @@ const port = 8000
 // TODO definir estructura 
 const  state = {
   view: 'home', 
-  select: 'blabla'
+  action: 'TODO'
 }
 // para que permita las referencias cruzadas 
 app.use(function(req, res, next) {

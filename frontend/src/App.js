@@ -1,11 +1,16 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useReducer} from 'react'
 import axios from 'axios'
+import RouterWrapper from './routes'
+import { appStateUrl} from './routesURL'
+import { storeReducer, Store } from './store'
+import { initialStore , ActionTypes} from './gestor'
 
-import { appStateUrl} from './routes'
 const TIMEOUT = 1000 // milisegundos en hacer petición (1000ms = 1s)
+
 function App() {
-  const [state, setState ] = useState(null)
-  const [recarga, setRecarga] = useState(0)
+  
+  const [state, dispatch] = useReducer( storeReducer, initialStore)
+
   // cuando se monta 
 
   useEffect( ()=> {
@@ -13,10 +18,9 @@ function App() {
     const timer = setTimeout(() => {
       axios.get(appStateUrl)
       .then( res => {
-        setState(res.data)
+         dispatch({type: ActionTypes.actualizaVista, view: res.data.view})
         console.log(res.data)
-        //return res.data
-        setRecarga(recarga+1)
+        dispatch({type: ActionTypes.sumaContador})
       })
       .catch( (err) => {
         console.log(err)
@@ -27,7 +31,9 @@ function App() {
 
 
   return (
-  <h2> Working on provider</h2>
+    <Store.Provider value={state}>
+      <RouterWrapper />
+    </Store.Provider>
   );
 }
 
