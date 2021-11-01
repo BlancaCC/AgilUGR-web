@@ -17,3 +17,4 @@ export const ActionTypes = {
     dentroVista : 'dentroVista',
     sumaContador : 'sumaContador',
 }
+

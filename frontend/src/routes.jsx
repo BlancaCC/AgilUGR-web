@@ -6,17 +6,18 @@ import Main from './layouts/Main'
 import Profile from './views/Profile'
 import Debug from './views/Debug'
 // urls 
-import {profileURL, debugURL} from './routesURL'
+import {profileURL, focusURL,statsURL,debugURL} from './routesURL'
 
 // router 
 function Router () {
     return useRoutes([
-
         {
             path: '/', 
             element: <Main/>,
             children: [
                 {path: profileURL, element: <Profile/>},
+                {path: focusURL, element: <Profile/>},
+                {path: statsURL, element: <Profile/>},
                 {path: debugURL, element: <Debug/>},
                 // TODO other views 
             ]
