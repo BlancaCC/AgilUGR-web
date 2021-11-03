@@ -9,6 +9,7 @@ const StyledPanel = styled.div`
     margin: 12px;
     width: 80vw;
     height: 60vh;
+    padding: 30px;
 `;
 
 export default StyledPanel

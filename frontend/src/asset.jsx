@@ -1,0 +1,3 @@
+/**
+ * Fichero con funciones auxiliasres 
+ */
