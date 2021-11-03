@@ -6,13 +6,13 @@ const port = 8000
 
 // Guarda el estado actual del proyecto
 // TODO definir estructura 
-const  state = {
-  view: 'home', 
-  action: 'TODO'
-}
 const file = './state.json'
-// fs.writeFileSync(file, data)
-
+const state = fs.readJSON(file, {throws: false})
+.then(obj => {
+  console.log(`Read state: ${JSON.stringify(obj)}`)
+  return obj
+})
+.catch(err => console.error(err))
 // para que permita las referencias cruzadas 
 app.use(function(req, res, next) {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -24,25 +24,33 @@ app.use(function(req, res, next) {
 
 // cuando se pregunta por raiz se devuelve el estado actual de la app
 app.get('/', (req, res) => {
-  //res.send(state)
-  let respuesta; 
-  fs.readJSON(file, {throws: false})
+  
+  const state = fs.readJSON(file, {throws: false})
   .then(obj => {
-    console.log(obj)
+    console.log(`Read state: ${JSON.stringify(obj)}`)
     res.send(obj)
+    return obj
   })
   .catch(err => console.error(err))
-  console.log(`GET ${req.hostname}`)
-
+  console.log(`GET ${req.hostname} ${JSON.stringify(state)}`)
+  
 })
 
 app.put('/view/:view', (req, res)=>{
   const {view} = req.params
   // TODO control de la corrección 
-  state.view = view
-  process.env.VIEW=view
-  res.send(`View updated with ${view}`)
-  console.log(`PUT accepted. VIEW updated with ${view}`)
+  const state = fs.readJSON(file, {throws: false})
+  .then(obj => {
+  console.log(`PUT Read state: ${JSON.stringify(obj)}`)
+  const newState =  {...obj,"view": view}
+  res.send(`State update now is  ${JSON.stringify(newState)}`)
+  return newState
+  })
+  .then(obj => fs.writeJson(file, obj))
+  .then(() => {
+    console.log(`PUT accepted. VIEW updated`)
+  })
+  .catch(err => console.error(err))
 })
 
 app.listen(port, () => {
