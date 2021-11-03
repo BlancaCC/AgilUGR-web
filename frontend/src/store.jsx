@@ -13,7 +13,7 @@ export const Store = createContext(initialStore)
 export const storeReducer = ( state , action ) => {
     switch ( action.type) {
         case ActionTypes.actualizaVista:
-            return {...state, view: action.view}
+            return {...state, view: '/'+action.view}
         case ActionTypes.sumaContador:
             return {...state, counter: state.counter +1}
         default:

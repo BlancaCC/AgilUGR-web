@@ -10,5 +10,6 @@ export const debugURL  = '/debug'
 export const ViewURL = {
     profile : profileURL,
     focus: focusURL,
-    stats: statsURL
+    stats: statsURL, 
+    debug: debugURL,
 }

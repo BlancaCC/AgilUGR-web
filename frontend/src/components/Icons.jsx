@@ -40,11 +40,9 @@ const Icons = () => {
                         </StyledIconsOne>
                     )
                 }) 
-
             }
         </StyledIcons>
     )
-
 }
 
 export default Icons
