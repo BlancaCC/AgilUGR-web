@@ -3,6 +3,9 @@ import styled from 'styled-components'
 import StyledPanel from "../components/Panels";
 import { Store } from "../store";
 import {ViewURL} from '../routesURL'
+import { RowFlexSpaceAround, ColumnFlexSpaceBetween} from "../asset";
+import { FaUserGraduate} from "react-icons/fa";
+import {AiOutlineIdcard} from "react-icons/ai"
 
 const ProfileStyle = styled(StyledPanel)`
 `
@@ -10,14 +13,16 @@ const Profile = () => {
     const store = useContext(Store)
     return (
         <ProfileStyle>
-            <h1> I am a profile</h1>
-            El valor que recibe del backend es {store.view}
-            <br/> 
-            Los valores posibles:  <br/> 
-            profile: {ViewURL.profile} <br/> 
-            focus: {ViewURL.focus} <br/> 
-            stats: {ViewURL.stats} <br/> 
-            debug: {ViewURL.debug} <br/> 
+            <RowFlexSpaceAround>
+                <ColumnFlexSpaceBetween>
+                    <h2> Euler Sanchez</h2>
+                    <FaUserGraduate size="20em" />
+                </ColumnFlexSpaceBetween>
+                <ColumnFlexSpaceBetween>
+                    <h3> Mi TUi</h3>
+                    <AiOutlineIdcard size="20em" />
+                </ColumnFlexSpaceBetween>            
+            </RowFlexSpaceAround>
         </ProfileStyle>      
     )
 } 
