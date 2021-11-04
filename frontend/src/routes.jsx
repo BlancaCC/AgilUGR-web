@@ -5,6 +5,7 @@ import Main from './layouts/Main'
 // vistas 
 import Profile from './views/Profile'
 import Debug from './views/Debug'
+import Stats from './views/Stats'
 // urls 
 import {profileURL, focusURL,statsURL,debugURL} from './routesURL'
 
@@ -17,7 +18,7 @@ function Router () {
             children: [
                 {path: profileURL, element: <Profile/>},
                 {path: focusURL, element: <Profile/>},
-                {path: statsURL, element: <Profile/>},
+                {path: statsURL, element: <Stats/>},
                 {path: debugURL, element: <Debug/>},
                 // TODO other views 
             ]

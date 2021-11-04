@@ -3,27 +3,29 @@ import styled from 'styled-components'
 import StyledPanel from "../components/Panels";
 import { Store } from "../store";
 import { RowFlexSpaceAround, ColumnFlexSpaceBetween} from "../asset";
-import { FaUserGraduate} from "react-icons/fa";
-import {AiOutlineIdcard} from "react-icons/ai"
+import { ImStatsDots} from "react-icons/im";
+import {IoMdStats} from "react-icons/io"
 
-const ProfileStyle = styled(StyledPanel)`
+
+const Style = styled(StyledPanel)`
 `
-const Profile = () => {
+const Stats = () => {
     const store = useContext(Store)
     return (
-        <ProfileStyle>
+        <Style>
             <RowFlexSpaceAround>
+                <h1> Mis estadísticas</h1>
                 <ColumnFlexSpaceBetween>
-                    <h2> Euler Sanchez</h2>
-                    <FaUserGraduate size="20em" />
+                    <h2> Tiempo de estudio mensual</h2>
+                    <ImStatsDots size="20em" />
                 </ColumnFlexSpaceBetween>
                 <ColumnFlexSpaceBetween>
-                    <h3> Mi TUi</h3>
-                    <AiOutlineIdcard size="20em" />
+                    <h3> Tiempo dedicado esta semana</h3>
+                    <IoMdStats size="20em" />
                 </ColumnFlexSpaceBetween>            
             </RowFlexSpaceAround>
-        </ProfileStyle>      
+        </Style>      
     )
 } 
 
-export default Profile
+export default Stats
