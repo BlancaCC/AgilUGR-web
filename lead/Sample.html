@@ -85,6 +85,45 @@ Leap.loop(controllerOptions, function(frame) {
       handString += "Arm center: " + vectorToString(hand.arm.center()) + "<br />";
       handString += "Arm up vector: " + vectorToString(hand.arm.basis[1]) + "<br />";
 
+      // CODIGO PROPIO ENVIAR MANO DERECHA E IZQUIERDA
+      /*var xhr = new XMLHttpRequest();
+      xhr.open("PUT", yourUrl, true);
+      xhr.setRequestHeader('Content-Type', 'application/json');
+      xhr.send(JSON.stringify({
+          value: value
+      }));*/
+      /**
+      var httpRequest = new XMLHttpRequest();
+      httpRequest.onreadystatechange = alertContents;
+      httpRequest.open('PUT', 'http://localhost:8000/lead');
+      httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+      httpRequest.send('hola');
+      console.log('HOLAAAAAAAA')
+      */
+
+      const dataObject = {id: 1,
+      title: 'codezup code the way up',
+      body: 'techincal tutorial',
+      userId: 1,
+        mano: 'funciona, porfi',
+      };
+
+      fetch('http://localhost:8000/leap/izquierda',{
+      method:'POST',
+      headers:{
+      'Content-Type':'application/json'
+      },
+      body:JSON.stringify(dataObject)
+    }).then(response=>{
+        return response.json()
+    }).then(data=> 
+    // this is the data we get after putting our data,
+    console.log(data)
+    );
+
+      // FIN DEL CÓDIGO PROPIO
+        
+
       // Hand motion factors
       if (previousFrame && previousFrame.valid) {
         var translation = hand.translation(previousFrame);

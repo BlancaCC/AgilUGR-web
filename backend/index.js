@@ -36,6 +36,31 @@ app.get('/', (req, res) => {
   
 })
 
+app.post('/leap', (req, res)=>{
+  const {mano} = req.params
+  console.log(`recibe petición de put ${mano}`)
+  res.send(`He leido ${req}`)
+  // TODO control de la corrección 
+  /** 
+  const state = fs.readJSON(file, {throws: false})
+  .then(obj => {
+  console.log(`PUT Read state: ${JSON.stringify(obj)}`)
+  const newState =  {...obj,"view": view}
+  res.send(`State update now is  ${JSON.stringify(newState)}`)
+  return newState
+  })
+  .then(obj => fs.writeJson(file, obj))
+  .then(() => {
+    console.log(`PUT accepted. VIEW updated`)
+  })
+  .catch(err => console.error(err))
+
+  */
+  
+})
+
+
+
 app.put('/view/:view', (req, res)=>{
   const {view} = req.params
   // TODO control de la corrección 

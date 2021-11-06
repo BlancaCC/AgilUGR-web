@@ -10,6 +10,7 @@ Web and backend for the app AgilUGR built for NPI
 ### Pasos para levantar backend
 
 0. Estar en la carpeta de backend.  
+` http://localhost:8000`.
 1. Instalar paquetes como express. 
 `npm install`
 
@@ -32,7 +33,6 @@ Agil UGR listening at http://localhost:8000
 Usar una petición get a la raiz.
 
 Esto es tan simple como abrir el navegador y escribir:
-` http://localhost:8000`.
 
 
 ### Sobreescribir estado de la app
