@@ -1,7 +1,6 @@
-import React, {useContext} from "react";
+import React from "react";
 import styled from 'styled-components'
 import StyledPanel from "../components/Panels";
-import { Store } from "../store";
 import { RowFlexSpaceAround, ColumnFlexSpaceBetween} from "../asset";
 import { ImStatsDots} from "react-icons/im";
 import {IoMdStats} from "react-icons/io"
@@ -10,7 +9,6 @@ import {IoMdStats} from "react-icons/io"
 const Style = styled(StyledPanel)`
 `
 const Stats = () => {
-    const store = useContext(Store)
     return (
         <Style>
             <RowFlexSpaceAround>

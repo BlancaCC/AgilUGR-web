@@ -9,7 +9,11 @@ interface IState {
 export const initialStore = {
     view: profileURL, // url de la vista
     counter: 0, //número de peticiones hechas 
-    action: null,
+    action: 0,  // refleja el estado el tiempo
+    tiempo: 0, // indíce del vector de tiempo seleccionado
+    // descomentar uno de timeAction para probarlo
+    timeAction: 'SELECCIONADO',//'PARADO', // otra opción sería seleccionado 
+    // timeAction: 'PARADO',
 }
 //Acciones válidas que se le pasarán a la API
 export const ActionTypes = {

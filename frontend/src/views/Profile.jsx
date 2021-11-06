@@ -1,7 +1,7 @@
-import React, {useContext} from "react";
+import React /*, {useContext}*/ from "react";
 import styled from 'styled-components'
 import StyledPanel from "../components/Panels";
-import { Store } from "../store";
+// import { Store } from "../store";
 import { RowFlexSpaceAround, ColumnFlexSpaceBetween} from "../asset";
 import { FaUserGraduate} from "react-icons/fa";
 import {AiOutlineIdcard} from "react-icons/ai"
@@ -9,7 +9,7 @@ import {AiOutlineIdcard} from "react-icons/ai"
 const ProfileStyle = styled(StyledPanel)`
 `
 const Profile = () => {
-    const store = useContext(Store)
+    // const store = useContext(Store)
     return (
         <ProfileStyle>
             <RowFlexSpaceAround>

@@ -11,9 +11,11 @@ const Debug = () => {
     Peticiones desde que se lanzó la página al backend :{store.counter} <br/>
     <h2> La información que contiene el estado </h2>
     View: {store.view} <br/>
-    Select: {store.action}
-
-    Los valores posibles:  <br/> 
+    Action: {store.action}  <br/>
+    Tiempo : {store.tiempo}  <br/>
+    timeAction : {store.timeAction}  (Valores posibles PARADO, SELECCIONADO)<br/>
+    <br/>
+    Los valores posibles de view:  <br/> 
       profile: {ViewURL.profile} <br/> 
       focus: {ViewURL.focus} <br/> 
       stats: {ViewURL.stats} <br/> 
