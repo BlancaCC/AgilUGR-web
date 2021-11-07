@@ -18,7 +18,8 @@ function App() {
     const timer = setTimeout(() => {
       axios.get(appStateUrl)
       .then( res => {
-         dispatch({type: ActionTypes.actualizaVista, view: res.data.view})
+        // dispatch({type: ActionTypes.actualizaVista, view: res.data.view})
+        dispatch({type: ActionTypes.subidaGeneral, view: res.data})
         console.log(res.data)
         dispatch({type: ActionTypes.sumaContador})
       })

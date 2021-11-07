@@ -1,8 +1,12 @@
 const fs = require('fs-extra')
 const express = require('express')
 const app = express()
+
 const port = 8000
 
+// some configuration
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 // Guarda el estado actual del proyecto
 // TODO definir estructura 
@@ -37,26 +41,25 @@ app.get('/', (req, res) => {
 })
 
 app.post('/leap', (req, res)=>{
-  const {mano} = req.params
-  console.log(`recibe petición de put ${mano}`)
-  res.send(`He leido ${req}`)
+  // añadir parámetro a detectar
+  const {mano, gesto} = req.body
+  console.log(`recibe petición de put mano: ${mano} gesto: ${gesto}`)
+ 
   // TODO control de la corrección 
-  /** 
   const state = fs.readJSON(file, {throws: false})
   .then(obj => {
-  console.log(`PUT Read state: ${JSON.stringify(obj)}`)
-  const newState =  {...obj,"view": view}
+  // escribir los parámetros que se quieren detectar
+  const newState =  {...obj, ...req.body}
+    // mano: mano, gesto: gesto}
+  console.log(`POST  UPATE TO: ${JSON.stringify(newState)}`)
   res.send(`State update now is  ${JSON.stringify(newState)}`)
   return newState
   })
   .then(obj => fs.writeJson(file, obj))
   .then(() => {
-    console.log(`PUT accepted. VIEW updated`)
+    console.log(`State updated correctly`)
   })
   .catch(err => console.error(err))
-
-  */
-  
 })
 
 
