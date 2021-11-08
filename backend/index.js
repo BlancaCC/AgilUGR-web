@@ -78,6 +78,28 @@ app.put('/view/:view', (req, res)=>{
   .catch(err => console.error(err))
 })
 
+
+// Detectar posición eje x del dedo meñique
+app.put('/leap/:view', (req, res)=>{
+  const {view} = req.params
+  // TODO control de la corrección 
+  const state = fs.readJSON(file, {throws: false})
+  .then(obj => {
+  console.log(`PUT Read state: ${JSON.stringify(obj)}`)
+  const newState =  {...obj,"dedo": view}
+  res.send(`State update now is  ${JSON.stringify(newState)}`)
+  return newState
+  })
+  .then(obj => fs.writeJson(file, obj))
+  .then(() => {
+    console.log(`PUT accepted. VIEW updated`)
+  })
+  .catch(err => console.error(err))
+})
+
+
+
+//Esto es del puerto en el que escucha. NO DUPLICAR O FALLARÁ por intentar acceder doble al puerto
 app.listen(port, () => {
   console.log(`Agil UGR listening at http://localhost:${port}`)
 })

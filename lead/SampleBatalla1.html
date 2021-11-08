@@ -211,6 +211,15 @@ Leap.loop(controllerOptions, function(frame) {
 
   // Store frame for motion functions
   previousFrame = frame;
+
+
+
+  // ===== Nuestra muestra ========
+  var nuestrosDatosOutput = document.getElementById("nuestrosDatos");
+
+  var nuestrosDatosString = "Swipe: " + Swipe([frame?.pointables[1]?.direction[0],frame?.pointables[2]?.direction[0],frame?.pointables[3]?.direction[0],frame?.pointables[4]?.direction[0]]) + "</br>";
+  nuestrosDatosOutput.innerHTML = nuestrosDatosString;
+  
 })
 
 function vectorToString(vector, digits) {
@@ -240,6 +249,32 @@ function pauseForGestures() {
   }
 }
 
+  // FUNCIONES PROPIAS
+/*
+  leftSwite recibe el valor de la coordenada x del dedo meñique y determina si está o no en posición <-0.5
+  Esto significa que la mano está girada hacia la izquierda
+*/
+function Swipe(array_puntos) {
+  var movimiento = "NADA" ; 
+
+  if(  array_puntos !== null){
+    var digits = (array_puntos[1] +  array_puntos[2] +  array_puntos[3] +  array_puntos[4]) / 4.0;
+      if (digits<(-0.5)){
+        movimiento = "SwipeIzquierda";
+      }
+      else if (digits>(0.5)){
+        movimiento = "SwipeDerecha";
+      }
+  }
+    return movimiento;
+     
+  }
+const muestraMensaje = () => {
+  return "soy una preciosa función void"
+}
+
+
+
 </script>
 </head>
 <body>
@@ -247,6 +282,8 @@ function pauseForGestures() {
 <div id="main">
   <button id="pause" onclick="togglePause()">Pause</button>
   <input type="checkbox" id="pauseOnGesture" onclick="pauseForGestures()">Pause on gesture</input>
+  <h3>NUESTROS DATILLOS</h3>
+  <div id="nuestrosDatos"></div>
   <h3>Frame data:</h3>
   <div id="frameData"></div>
   <div style="clear:both;"></div>
@@ -258,6 +295,7 @@ function pauseForGestures() {
   <div style="clear:both;"></div>
   <h3>Gesture data:</h3>
   <div id="gestureData"></div>
+  
 </div>
 </body>
 </html>

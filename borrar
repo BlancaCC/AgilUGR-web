@@ -1,25 +1,34 @@
-To fix the dependency tree, try following the steps below in the exact order:
 
-  1. Delete package-lock.json (not package.json!) and/or yarn.lock in your project folder.
-  2. Delete node_modules in your project folder.
-  3. Remove "webpack" from dependencies and/or devDependencies in the package.json file in your project folder.
-  4. Run npm install or yarn, depending on the package manager you use.
+  // FUNCIONES PROPIAS
+/*
+  leftSwite recibe el valor de la coordenada x del dedo meñique y determina si está o no en posición <-0.5
+  Esto significa que la mano está girada hacia la izquierda
+*/
+  function leftSwipe(digits) {
+  if (digits<(-0.5))
+    //Mandar al backend
+  return "LEFTSWIPE";
+}
 
-In most cases, this should be enough to fix the problem.
-If this has not helped, there are a few other things you can try:
 
-  5. If you used npm, install yarn (http://yarnpkg.com/) and repeat the above steps with it instead.
-     This may help because npm has known issues with package hoisting which may get resolved in future versions.
 
-  6. Check if C:\Users\Irene\Documents\Carrera\QuintoPrimerCuatri\NuevosParadigmas\AgilUGR-web\frontend\node_modules\webpack is outside your project directory. 
-     For example, you might have accidentally installed something in your home folder.
+      const dataObject = {id: 1,
+      title: 'codezup code the way up',
+      body: 'techincal tutorial',
+      userId: 1,
+        mano: 'funciona, porfi',
+      };
 
-  7. Try running npm ls webpack in your project folder.
-     This will tell you which other package (apart from the expected react-scripts) installed webpack.
+      fetch('http://localhost:8000/leap/izquierda',{
+      method:'POST',
+      headers:{
+      'Content-Type':'application/json'
+      },
+      body:JSON.stringify(dataObject)
+    }).then(response=>{
+        return response.json()
+    }).then(data=> 
+    // this is the data we get after putting our data,
+    console.log(data)
+    );
 
-If nothing else helps, add SKIP_PREFLIGHT_CHECK=true to an .env file in your project.
-That would permanently disable this preflight check in case you want to proceed anyway.
-
-P.S. We know this message is long but please read the steps above :-) We hope you find them helpful!
-
-PS C:\Users\Irene\Documents\Carrera\QuintoPrimerCuatri\NuevosParadigmas\AgilUGR-web\frontend>
