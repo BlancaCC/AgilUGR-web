@@ -18,7 +18,7 @@ export const storeReducer = ( state , action ) => {
             return {...state, counter: state.counter +1}
         // la idea sería quedarse con esto
         case ActionTypes.subidaGeneral: 
-            return {...state, ...action}
+            return {...state, view: '/'+action.view}
         default:
             throw new Error()
     }

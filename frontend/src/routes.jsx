@@ -8,6 +8,7 @@ import Profile from './views/Profile'
 import Debug from './views/Debug'
 import Stats from './views/Stats'
 import Focus from './views/Focus'
+import Leap from './views/Leap'
 // urls 
 import {profileURL, focusURL,statsURL,debugURL} from './routesURL'
 
@@ -25,6 +26,7 @@ function Router () {
                 // TODO other views 
             ]
         },
+        {path: '/leap', element: <Leap />}, 
         {
             path: '*', 
             element: <Navigate to={profileURL} replace />
