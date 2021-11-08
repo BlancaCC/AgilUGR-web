@@ -4,7 +4,6 @@ import {Outlet} from 'react-router-dom'
 import Header from '../components/Header'
 import { MainBackground } from '../themeVars'
 import Icons from '../components/Icons'
-// TODO //create Header
 
 const Wrapper = styled.div`
     background: ${MainBackground};

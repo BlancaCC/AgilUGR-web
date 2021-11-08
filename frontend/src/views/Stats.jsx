@@ -1,5 +1,7 @@
-import React from "react";
+import React , {useContext, useEffect} from "react";
+import { Navigate } from "react-router-dom";
 import styled from 'styled-components'
+import {Store} from '../store'
 import StyledPanel from "../components/Panels";
 import { RowFlexSpaceAround, ColumnFlexSpaceBetween} from "../asset";
 import { ImStatsDots} from "react-icons/im";
@@ -9,6 +11,12 @@ import {IoMdStats} from "react-icons/io"
 const Style = styled(StyledPanel)`
 `
 const Stats = () => {
+    const store = useContext(Store)
+    const {view} = store
+    useEffect (() => {
+        <Navigate to={view}/>
+    }
+    ,[view])
     return (
         <Style>
             <RowFlexSpaceAround>

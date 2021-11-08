@@ -14,7 +14,7 @@ Web and backend for the app AgilUGR built for NPI
 1. Instalar paquetes como express. 
 `npm install`
 
-2. `npm start`  levantar servidor.
+2. `npm start`  levantar servidor. 
 
 Si todo es correcto aparecerá en la terminal:
 
@@ -68,8 +68,23 @@ como por ejemplo:
 
 ## Cómo levantar el Frontend
 
+### Si se utiliza Linux 
+
 ```
 cd frontend
 npm start
 npm start  #  Starts the development server.
 ```
+
+(Si da error puede ser porque tenga algún argumento de más el package.json en la instrucción ).   
+
+
+### Si utilizas Window 
+
+Primero se debe cambiar el archivo `package.json` y sustituir la línea: 
+
+```
+"start": "react-scripts start",
+```
+Por ` "start": "react-scripts --openssl-legacy-provider start",`
+

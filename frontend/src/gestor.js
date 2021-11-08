@@ -20,5 +20,6 @@ export const ActionTypes = {
     actualizaVista : 'ActualizaVista',
     dentroVista : 'dentroVista',
     sumaContador : 'sumaContador',
+    subidaGeneral: 'subidaGeneral',
 }
 
