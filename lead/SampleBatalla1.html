@@ -301,15 +301,13 @@ function Indica(array_puntos) {
 
         // contmos los numeros de dedos extendidos 
         var contador = 0;
-        for (var j = 0; j < 5; j++) {
+        for (var j = 0; j < frame_pointables.length; j++) {
           if( frame_pointables[j]?.extended === true){
             contador += 1;
           }
         }
         salida = contador
-       
       }
- 
     return salida 
 }
 
