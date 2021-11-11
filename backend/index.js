@@ -40,24 +40,22 @@ app.get('/', (req, res) => {
   
 })
 
-app.post('/leap', (req, res)=>{
-  // añadir parámetro a detectar
-  const {mano, gesto} = req.body
-  console.log(`recibe petición de put mano: ${mano} gesto: ${gesto}`)
- 
+/**Put general para hacer subidas :)*/
+app.put('/general/:attribute/:value', (req, res)=>{
+  const {attribute, value} = req.params
   // TODO control de la corrección 
   const state = fs.readJSON(file, {throws: false})
   .then(obj => {
-  // escribir los parámetros que se quieren detectar
-  const newState =  {...obj, ...req.body}
-    // mano: mano, gesto: gesto}
-  console.log(`POST  UPATE TO: ${JSON.stringify(newState)}`)
+  console.log(`PUT Read state: ${JSON.stringify(obj)}`)
+  // actualizamos el valor del Json
+  const newState = obj
+  newState[attribute] = value
   res.send(`State update now is  ${JSON.stringify(newState)}`)
   return newState
   })
   .then(obj => fs.writeJson(file, obj))
   .then(() => {
-    console.log(`State updated correctly`)
+    console.log(`PUT accepted. GENERAL updated`)
   })
   .catch(err => console.error(err))
 })

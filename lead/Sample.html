@@ -85,16 +85,6 @@ Leap.loop(controllerOptions, function(frame) {
       handString += "Arm center: " + vectorToString(hand.arm.center()) + "<br />";
       handString += "Arm up vector: " + vectorToString(hand.arm.basis[1]) + "<br />";
 
-      // CODIGO PROPIO ENVIAR MANO DERECHA E IZQUIERDA
-      /**
-      var httpRequest = new XMLHttpRequest();
-      httpRequest.onreadystatechange = alertContents;
-      httpRequest.open('PUT', 'http://localhost:8000/lead');
-      httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-      httpRequest.send('hola');
-      console.log('HOLAAAAAAAA')
-      */
-
       const dataObject = {id: 1,
       title: 'codezup code the way up',
       body: 'techincal tutorial',
