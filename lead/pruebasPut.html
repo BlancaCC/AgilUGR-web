@@ -24,16 +24,28 @@ See additional libraries, guides, and examples at:
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Leap Motion JavaScript Sample</title>
 </head>
-
 <body>
     Estos son los dos bibliotecas principales sobre las que cargar las cosas: 
     <script src="../frontend/node_modules/axios/dist/axios.min.js"></script>
     <script src="peticiones.js"></script>
-
-    <h1>Leap Motion JavaScript Sample</h1>
+    (^^Justo encima de estas flechas en el código^^)
+    <h1>Ventana de prueba para las funciones de peticiones de datos</h1>
     <div id="main">
-    <h1> Hola, esto es un programa de prueba</h1>
-    <button onclick="fetchUsers()"> Soy un delicado botón </button>  
+    <form>
+        <label for="fgesto">Swipe: </label> 
+        <input type="text" id="swipe" name="fname" value="Valor-del-gesto"> 
+        </br>
+        <label for="fgesto">Numero de dedos: </label> 
+        <input type="text" id="dedos" name="fname" value="Valor-del-gesto">  
+        </br>
+        <label for="fgesto"> Tap o clicar o como se llame: </label> 
+        <input type="text" id="tap" name="fname" value="Valor-del-gesto">  
+    </form>
+
+    </br>  </br>  </br>  
+    <button onclick="fetchDataAux()"> Actualiza el contenido </button>   </br> 
+    El contenido actual de la web es: </br>
+    <div id='mensaje'></div>
     </div>
 </body>
 </html>
