@@ -7,7 +7,7 @@ var url = 'http://localhost:8000/'
  * @param {*} route a qué ruta se le hace el put
  */
 const putData = (data, route) => {
-    const custom_url = url + route + '/' + data
+    const custom_url = url +'general/'+ route + '/' + data
     axios.put( custom_url) 
         .then(response => {
             const data = response.data;
