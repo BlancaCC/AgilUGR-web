@@ -28,7 +28,6 @@ app.use(function(req, res, next) {
 
 // cuando se pregunta por raiz se devuelve el estado actual de la app
 app.get('/', (req, res) => {
-  
   const state = fs.readJSON(file, {throws: false})
   .then(obj => {
     console.log(`Read state: ${JSON.stringify(obj)}`)
@@ -46,16 +45,20 @@ app.put('/general/:attribute/:value', (req, res)=>{
   // TODO control de la corrección 
   const state = fs.readJSON(file, {throws: false})
   .then(obj => {
-  console.log(`PUT Read state: ${JSON.stringify(obj)}`)
+  
   // actualizamos el valor del Json
   const newState = obj
   newState[attribute] = value
   res.send(`State update now is  ${JSON.stringify(newState)}`)
+  console.log(`PUT GENEARL Read stat: ${JSON.stringify(newState)}`)
   return newState
   })
-  .then(obj => fs.writeJson(file, obj))
-  .then(() => {
-    console.log(`PUT accepted. GENERAL updated`)
+  .then(obj => {
+    fs.writeJson(file, obj)
+    return obj
+  })
+  .then((obj) => {
+    console.log(`PUT accepted. GENERAL updated ${JSON.stringify(obj)}`)
   })
   .catch(err => console.error(err))
 })

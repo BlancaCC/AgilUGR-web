@@ -13,8 +13,12 @@ const putData = (data, route) => {
             const data = response.data;
             console.log(`PUT to ${custom_url}`, data);
         })
+        .catch(error => alert(error));
 }
-//--------------------
+const MuestraAlgo = () => {
+    alert('Hola esto es un mensae de prueba')
+}
+//---------------- ----
 // Funciones con las que testear. Tienen sentido dentro del fichero pruebasPut.html 
 // Es una petición de lectura de la web 
 const fetchDataAux = () => {
@@ -23,9 +27,12 @@ var swipe = document.getElementById("swipe").value
 var dedos = document.getElementById("dedos").value
 var tap = document.getElementById('tap').value 
 // actualizamos el contenido, haciendo peticiones de put
+
+/*
 putData(swipe, 'swipe')
 putData(dedos, 'dedos')
 putData(tap, 'tap')
+*/
 //refrescamos el contenido de la página
 axios.get(url)
 .then(response => {
