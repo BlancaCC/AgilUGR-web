@@ -18,7 +18,7 @@ export const RowFlexSpaceAround = styled.div`
     align-items: center; 
     align-content: space-between;
     justify-content: space-around;
-    
+    flex: 1;
 `
 export const ColumnFlexSpaceBetween= styled.div`
     display: flex;

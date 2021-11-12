@@ -24,10 +24,8 @@ const Wrapper = styled.div`
 const ContentStyle = styled.div`
     margin: auto;
 `
-
 const SwitcherVistas = (nombreVista)  => {
     let vistaSeleccionada; 
-
     switch(nombreVista) {
         case ViewURL.stats: 
             vistaSeleccionada = Stats;

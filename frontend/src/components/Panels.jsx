@@ -10,6 +10,11 @@ const StyledPanel = styled.div`
     width: 80vw;
     height: 60vh;
     padding: 30px;
+    /*
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    */
 `;
 
 export default StyledPanel
