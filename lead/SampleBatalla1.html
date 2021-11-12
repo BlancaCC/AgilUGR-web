@@ -24,6 +24,8 @@ See additional libraries, guides, and examples at:
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Leap Motion JavaScript Sample</title>
 <script src="http://js.leapmotion.com/leap-0.6.3.min.js"></script>
+<script src="../frontend/node_modules/axios/dist/axios.min.js"></script>
+<script src="peticiones.js"></script>
 <script>
 // Store frame for motion functions
 var previousFrame = null;
@@ -186,6 +188,8 @@ Leap.loop(controllerOptions, function(frame) {
                         + "normal: " + vectorToString(gesture.normal, 2) + ", "
                         + "radius: " + gesture.radius.toFixed(1) + " mm, "
                         + "progress: " + gesture.progress.toFixed(2) + " rotations";
+          
+          putData ( frame.timestamp, "circle")
           break;
         case "swipe":
           gestureString += "start position: " + vectorToString(gesture.startPosition) + " mm, "
