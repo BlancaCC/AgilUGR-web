@@ -13,14 +13,12 @@ function App() {
 
   // cuando se monta 
   useEffect( ()=> {
-
     const timer = setTimeout(() => {
       axios.get(appStateUrl)
       .then( res => {
         // dispatch({type: ActionTypes.actualizaVista, view: res.data.view})
         console.log(` Los datos del res en store,jsx son ${res.data}`)
         dispatch({type: ActionTypes.subidaGeneral, ...res.data})
-
         dispatch({type: ActionTypes.sumaContador})
       })
       .catch( (err) => {

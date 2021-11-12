@@ -44,7 +44,7 @@ const Parado  = () => (
 // Icono general del tiempo
 const Tiempo = (tiempo, estado) => {
     const Reloj = estado === timeActionStates.en_movimiento ? AnimatedClock : IoIosTimer;
-    const mensaje = estado === timeActionStates.parado ? 'Pendiente de activación': 
+    const mensaje = estado === timeActionStates.seleccionado ? 'Pendiente de activación': 
      `Quedan ${tiempo} min.`;
     const extra = estado === timeActionStates.seleccionado ? 
         'Dibuje un circulo para activa el reloj' 
@@ -60,11 +60,11 @@ const Tiempo = (tiempo, estado) => {
 const Focus = () => {
     const store = useContext(Store)
     const tiempos  = ['15', '30', '45', '60'] 
-    let CReloj; 
-    if(store.timeAction ===  timeActionStates.en_movimiento)
+    let CReloj = Parado; 
+    if(timeActionStates.parado !== store.timeAction &&
+        tiempos.length >= store.tiempo){
         CReloj = Tiempo(tiempos[store.tiempo -1], store.timeAction)
-    else
-        CReloj = Parado
+    }
             
     return (
         <Style>

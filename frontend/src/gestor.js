@@ -9,7 +9,7 @@ interface IState {
 export const timeActionStates = {
     parado : 'PARADO',
     seleccionado : 'SELECCIONADO',
-    en_movimiento : 'EN-MOVIEMIENTO',
+    en_movimiento : 'EN-MOVIMIENTO',
 }
 export const initialStore = {
     view: profileURL, // url de la vista

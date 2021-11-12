@@ -35,8 +35,6 @@ app.get('/', (req, res) => {
     return obj
   })
   .catch(err => console.error(err))
-  console.log(`GET ${req.hostname} ${JSON.stringify(state)}`)
-  
 })
 
 /**Put general para hacer subidas :)*/
