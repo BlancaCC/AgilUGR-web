@@ -11,6 +11,7 @@ import Focus from './views/Focus'
 import Leap from './views/Leap'
 // urls 
 import {profileURL, focusURL,statsURL,debugURL} from './routesURL'
+import LeapSensor from './views/LeapSensor'
 
 // router 
 function Router () {
@@ -27,6 +28,7 @@ function Router () {
             ]
         },
         {path: '/leap', element: <Leap />}, 
+        {path: '/sensor', element: <LeapSensor/>}, 
         {
             path: '*', 
             element: <Navigate to={profileURL} replace />
