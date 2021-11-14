@@ -13,10 +13,12 @@ const Style = styled(StyledPanel)`
 const Stats = () => {
     const store = useContext(Store)
     const {view} = store
+    /*
     useEffect (() => {
         <Navigate to={view}/>
     }
     ,[view])
+    */
     return (
         <Style>
             <RowFlexSpaceAround>

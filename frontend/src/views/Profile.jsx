@@ -13,11 +13,13 @@ const ProfileStyle = styled(StyledPanel)`
 const Profile = () => {
     const store = useContext(Store)
     const {view} = store
+    /*
     useEffect (() => {
         <Navigate to={'/stats'}/>
         console.log(`Entra en useEffect de profile ${store.view}`)
     }
     ,[view])
+    */
     return (
         <ProfileStyle>
             <RowFlexSpaceAround>
