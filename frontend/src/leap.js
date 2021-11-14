@@ -5,17 +5,17 @@ Esto significa que la mano está girada hacia la izquierda
 Las salidas posibles {NADA, IndicaIzquierda, IndicaDerecha}
 */
 export function Indica(array_puntos) {
-var movimiento = "NULL" ; 
+var movimiento = 0 //"NULL" ; 
 const umbral = 0.6;
 
 if(  array_puntos !== null){
-  movimiento = "FRENTE"
+  movimiento = 0 // "FRENTE"
   var digits = (array_puntos[1] +  array_puntos[2] +  array_puntos[3] +  array_puntos[0]) / 4.0;
     if (digits<(- umbral)){
-      movimiento = "IndicaIzquierda";
+      movimiento = -1 //"IndicaIzquierda";
     }
     else if (digits>(umbral)){
-      movimiento = "IndicaDerecha";
+      movimiento = 1//"IndicaDerecha";
     }
 }
   return movimiento;   
@@ -46,10 +46,10 @@ export function NumeroDedosAbiertos (frame_pointables) {
   return salida 
 }
 
-const VISTAS = {
-    '\focus': 0, 
-    '\profile' : 1, 
-    '\stats' : 2, 
+export const VISTAS_STRUCTURA = {
+    '/focus': 0, 
+    '/profile' : 1, 
+    '/stats' : 2, 
 }
 
-const VISTAS_ARRAY = [   '\focus', '\profile','\stats' ]
+export const VISTAS_ARRAY = [ 'focus', 'profile','stats' ]
