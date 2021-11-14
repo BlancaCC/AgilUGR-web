@@ -1,0 +1,18 @@
+{
+  "name": "docker",
+  "type" : "module",
+  "version": "1.0.0",
+  "description": "docker container with database and node server",
+  "main": "backend.js",
+  "scripts": {
+    "start": "node --es-module-specifier-resolution=node src/backend.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Blanca",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mariadb": "^2.5.5",
+    "node": "^17.1.0"
+  }
+}
