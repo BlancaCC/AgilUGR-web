@@ -42,7 +42,7 @@ const SwitcherVistas = (nombreVista)  => {
     }
     return vistaSeleccionada; 
 }
-const Leap = () =>{
+const Leap = () =>{   
     const store = useContext(Store);
     const Vista = SwitcherVistas(store.view);
     return(
