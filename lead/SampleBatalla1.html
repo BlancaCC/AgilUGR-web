@@ -234,8 +234,6 @@ Leap.loop(controllerOptions, function(frame) {
     + '<h4> Número de dedos estirados </h4>' + "</br>" 
     + 'Número de dedos estirados: ' + NumeroDedosAbiertos (frame?.pointables)
     + "</br>";
-  
-
    //  pointable.extended
   nuestrosDatosOutput.innerHTML = nuestrosDatosString;
 })
@@ -248,7 +246,6 @@ function vectorToString(vector, digits) {
              + vector[1].toFixed(digits) + ", "
              + vector[2].toFixed(digits) + ")";
 }
-
 function togglePause() {
   paused = !paused;
 
@@ -258,7 +255,6 @@ function togglePause() {
     document.getElementById("pause").innerText = "Pause";
   }
 }
-
 function pauseForGestures() {
   if (document.getElementById("pauseOnGesture").checked) {
     pauseOnGesture = true;

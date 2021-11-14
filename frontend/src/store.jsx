@@ -16,9 +16,9 @@ export const storeReducer = ( state , action ) => {
             return {...state, view: '/'+action.view}
         case ActionTypes.sumaContador:
             return {...state, counter: state.counter +1}
-        // la idea sería quedarse con esto
+        // la idea sería quedarse solo con este dispatch general
         case ActionTypes.subidaGeneral: 
-            return {...state, view: '/'+action.view}
+            return {...state, ...action, view: '/'+action.view, }
         default:
             throw new Error()
     }

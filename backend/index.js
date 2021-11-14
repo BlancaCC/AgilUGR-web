@@ -1,5 +1,9 @@
 const fs = require('fs-extra')
 const express = require('express')
+
+const { leapFile } = require( './actualizaLeapState')
+
+
 const app = express()
 
 const port = 8000
@@ -12,6 +16,7 @@ app.use(express.json());
 // TODO definir estructura 
 const file = './state.json'
 const state = fs.readJSON(file, {throws: false})
+
 .then(obj => {
   console.log(`Read state: ${JSON.stringify(obj)}`)
   return obj
@@ -35,8 +40,6 @@ app.get('/', (req, res) => {
     return obj
   })
   .catch(err => console.error(err))
-  console.log(`GET ${req.hostname} ${JSON.stringify(state)}`)
-  
 })
 
 /**Put general para hacer subidas :)*/

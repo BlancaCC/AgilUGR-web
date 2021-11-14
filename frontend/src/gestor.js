@@ -6,13 +6,18 @@ interface IState {
     counter: number
 }
 */
+export const timeActionStates = {
+    parado : 'PARADO',
+    seleccionado : 'SELECCIONADO',
+    en_movimiento : 'EN-MOVIMIENTO',
+}
 export const initialStore = {
     view: profileURL, // url de la vista
     counter: 0, //número de peticiones hechas 
     action: 0,  // refleja el estado el tiempo
-    tiempo: 0, // indíce del vector de tiempo seleccionado
+    tiempo: 2, // indíce del vector de tiempo seleccionado
     // descomentar uno de timeAction para probarlo
-    timeAction: 'SELECCIONADO',//'PARADO', // otra opción sería seleccionado 
+    timeAction: timeActionStates.en_movimiento//'SELECCIONADO',//'PARADO', // otra opción sería seleccionado 
     // timeAction: 'PARADO',
 }
 //Acciones válidas que se le pasarán a la API
