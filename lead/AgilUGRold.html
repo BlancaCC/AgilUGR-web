@@ -33,6 +33,53 @@ var pauseOnGesture = false;
 // Setup Leap loop with frame callback function
 var controllerOptions = {enableGestures: true};
 
+
+//---------------------------------------------------------------------------
+// VARIABLES GLOBALES PARA LOS DATOS DE VISTA
+
+/*
+   Asigna a cada vista un valor entero
+*/
+const VISTAS_STRUCTURA = {
+    'focus': 0, 
+    'profile' : 1, 
+    'stats' : 2, 
+}
+
+/*
+   Asigna a cada valor (posición en el array) una vista
+*/
+export const VISTAS_ARRAY = [ 'focus', 'profile','stats' ]
+
+/*
+  En función de los valores recogidos en el FRAME,
+  determina si la mano está posicionada a la izquierda o derecha
+  en función de la cantidad de veces que se estima ese resultado
+  en los 20 últimos datos aportados por el Leap
+*/
+export const ValorIndice = (FRAMES) => {
+  var  suma = 0;
+  FRAMES.forEach(element => {
+    suma += element.indice
+  });
+  
+  var resultado = suma/FRAMES.length;
+  if (resultado<-0.6){
+    resultado=-1;
+  }
+  else {
+    if (resultado>0.4){
+      resultado=1;
+    }
+    else
+      resultado=0;
+  }
+  //alert (resultado)
+  return resultado;
+}
+
+
+
 // to use HMD mode:
 // controllerOptions.optimizeHMD = true;
 
@@ -211,6 +258,35 @@ Leap.loop(controllerOptions, function(frame) {
 
   // Store frame for motion functions
   previousFrame = frame;
+
+
+  /******************** CÓDIGO NUESTRO ****************************/
+  
+  // ZONA DE DATOS DE VISTA
+
+  var datosVistaOutput = document.getElementById("datosVista");
+
+
+  var datosVistaString = "<h3> Vista: </h3>"+
+        "Indica: " + Indica(
+        [frame?.pointables[1]?.direction[0],
+        frame?.pointables[2]?.direction[0],
+        frame?.pointables[3]?.direction[0],
+        frame?.pointables[4]?.direction[0]]) + "</br>"
+        + 'Indice x: ' +  frame?.pointables[1]?.direction[0]+ "</br>"
+        + 'Corazón x: ' + frame?.pointables[2]?.direction[0]+ "</br>"
+        + 'Anular x: ' + frame?.pointables[3]?.direction[0]+ "</br>"
+        + 'Meñique x: ' + frame?.pointables[4]?.direction[0] + "</br>"
+        + '<h4> Número de dedos estirados </h4>' + "</br>" 
+        + 'Número de dedos estirados: ' + NumeroDedosAbiertos (frame?.pointables)
+        + "</br>";
+
+ datosVistaOutput.innerHTML = datosVistaString;
+
+
+
+ // ZONA DE DATOS DE TIEMPO
+
 })
 
 function vectorToString(vector, digits) {
@@ -240,6 +316,82 @@ function pauseForGestures() {
   }
 }
 
+
+
+//----------------------------------------------------------------------
+//{"view":"focus", "tiempo": 3, "timeAction" : "EN-MOVIMIENTO"}
+
+
+// FUNCIONES PARA LOS DATOS DE VISTA
+/*
+    Detecta la posición de la mano, y en función de ello devuelve un valor
+    Actúa sobre la variable de estado "Vista"
+    Salida {0 (de frente), 1 (girada a derecha, -1 (girada a izquierda))}
+*/
+
+function Indica(array_puntos) {
+  var movimiento = 0;//"NULL" ; 
+  const umbral = 0.5;
+
+  if(  array_puntos !== null){
+    movimiento = 0;//"FRENTE"
+    var digits = (array_puntos[1] +  array_puntos[2] +  array_puntos[3] +  array_puntos[0]) / 4.0;
+      if (digits<(- umbral)){
+        movimiento = -1;//"IndicaIzquierda";
+      }
+      else if (digits>(umbral)){
+        movimiento = 1;//"IndicaDerecha";
+      }
+  }
+    return movimiento;   
+}
+
+
+
+
+
+
+
+// FUNCIONES PARA LOS DATOS DE TIEMPO
+
+/*
+    Computa si la media de los datos están apuntando al frente
+    Determina cuantos dedos están extendidos sobre el Leap
+    Actúa sobre la variable de estado "Tiempo"
+    Salida {NO-COMPUTABLE, 0,1,2,3,4,5}
+*/
+  function NumeroDedosAbiertos (frame_pointables) {
+    var salida = 'NO-COMPUTABLE';
+    // tienen que estar apuntando al frente la media
+    if( 0 === Indica(
+    [frame_pointables[1]?.direction[0],
+    frame_pointables[2]?.direction[0],
+    frame_pointables[3]?.direction[0],
+    frame_pointables[4]?.direction[0]] )) {
+
+        // contmos los numeros de dedos extendidos 
+        var contador = 0;
+        for (var j = 0; j < frame_pointables.length; j++) {
+          if( frame_pointables[j]?.extended === true){
+            contador += 1;
+          }
+        }
+        salida = contador;
+    }
+    return salida 
+}
+
+
+
+
+
+//------------------------------------------------------------------------
+
+
+
+
+
+
 </script>
 </head>
 <body>
@@ -247,6 +399,13 @@ function pauseForGestures() {
 <div id="main">
   <button id="pause" onclick="togglePause()">Pause</button>
   <input type="checkbox" id="pauseOnGesture" onclick="pauseForGestures()">Pause on gesture</input>
+  <h1>VARIABLES DE ESTADO DE LA APP</h1>
+  <h2>Vista</h2>
+  <div id="datosVista"></div>
+  <h2>Tiempo</h2>
+  <div id="datosTiempo"></div>
+  <h2>Time Action</h2>
+  <div id="datosTimeActions"></div>
   <h3>Frame data:</h3>
   <div id="frameData"></div>
   <div style="clear:both;"></div>
