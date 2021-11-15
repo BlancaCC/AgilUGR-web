@@ -24,8 +24,6 @@ See additional libraries, guides, and examples at:
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Leap Motion JavaScript Sample</title>
 <script src="http://js.leapmotion.com/leap-0.6.3.min.js"></script>
-<script src="../frontend/node_modules/axios/dist/axios.min.js"></script>
-<script src="peticiones.js"></script>
 <script>
 // Store frame for motion functions
 var previousFrame = null;
@@ -290,7 +288,7 @@ function Indica(array_puntos) {
     Computa si la media de los datos están apuntando al frente
   Salida {NO-COMPUTABLE, 0,1,2,3,4,5}
   */
-  function NumeroDedosAbiertos (frame_pointables) {
+function NumeroDedosAbiertos (frame_pointables) {
     var salida = 'NO-COMPUTABLE';
     // tienen que estar apuntando al frente la media
     if( "FRENTE" === Indica(

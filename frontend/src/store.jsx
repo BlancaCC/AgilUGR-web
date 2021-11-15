@@ -19,6 +19,8 @@ export const storeReducer = ( state , action ) => {
         // la idea sería quedarse solo con este dispatch general
         case ActionTypes.subidaGeneral: 
             return {...state, ...action, view: '/'+action.view, }
+        case ActionTypes.tiempo: 
+            return {...state,  tiempo: action.tiempo }
         default:
             throw new Error()
     }

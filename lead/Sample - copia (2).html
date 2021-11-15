@@ -211,6 +211,25 @@ Leap.loop(controllerOptions, function(frame) {
 
   // Store frame for motion functions
   previousFrame = frame;
+
+  // ===== Nuestra muestra ========
+  var nuestrosDatosOutput = document.getElementById("nuestrosDatos");
+
+  var nuestrosDatosString = "<h4>Indica posición de la mano </h4>"+
+    "Indica: " + Indica(
+    [frame?.pointables[1]?.direction[0],
+    frame?.pointables[2]?.direction[0],
+    frame?.pointables[3]?.direction[0],
+    frame?.pointables[4]?.direction[0]]) + "</br>"
+    + 'Indice x: ' +  frame?.pointables[1]?.direction[0]+ "</br>"
+    + 'Corazón x: ' + frame?.pointables[2]?.direction[0]+ "</br>"
+    + 'Anular x: ' + frame?.pointables[3]?.direction[0]+ "</br>"
+    + 'Meñique x: ' + frame?.pointables[4]?.direction[0] + "</br>"
+    + '<h4> Número de dedos estirados </h4>' + "</br>" 
+    + 'Número de dedos estirados: ' + NumeroDedosAbiertos (frame?.pointables)
+    + "</br>";
+   //  pointable.extended
+  nuestrosDatosOutput.innerHTML = nuestrosDatosString;
 })
 
 function vectorToString(vector, digits) {
@@ -240,6 +259,52 @@ function pauseForGestures() {
   }
 }
 
+
+  /*
+    Computa si la media de los datos están apuntando al frente
+  Salida {NO-COMPUTABLE, 0,1,2,3,4,5}
+  */
+  function NumeroDedosAbiertos (frame_pointables) {
+    var salida = 'NO-COMPUTABLE';
+    // tienen que estar apuntando al frente la media
+    if( 0 === Indica(
+    [frame_pointables[1]?.direction[0],
+    frame_pointables[2]?.direction[0],
+    frame_pointables[3]?.direction[0],
+    frame_pointables[4]?.direction[0]] )) {
+
+        // contmos los numeros de dedos extendidos 
+        var contador = 0;
+        for (var j = 0; j < frame_pointables.length; j++) {
+          if( frame_pointables[j]?.extended === true){
+            contador += 1;
+          }
+        }
+        salida = contador;
+    }
+    return salida 
+}
+
+
+function Indica(array_puntos) {
+  var movimiento = 0;//"NULL" ; 
+  const umbral = 0.5;
+
+  if(  array_puntos !== null){
+    movimiento = 0;//"FRENTE"
+    var digits = (array_puntos[1] +  array_puntos[2] +  array_puntos[3] +  array_puntos[0]) / 4.0;
+      if (digits<(- umbral)){
+        movimiento = -1;//"IndicaIzquierda";
+      }
+      else if (digits>(umbral)){
+        movimiento = 1;//"IndicaDerecha";
+      }
+  }
+    return movimiento;   
+}
+
+
+
 </script>
 </head>
 <body>
@@ -247,6 +312,8 @@ function pauseForGestures() {
 <div id="main">
   <button id="pause" onclick="togglePause()">Pause</button>
   <input type="checkbox" id="pauseOnGesture" onclick="pauseForGestures()">Pause on gesture</input>
+  <h3>NUESTROS DATILLOS</h3>
+  <div id="nuestrosDatos"></div>
   <h3>Frame data:</h3>
   <div id="frameData"></div>
   <div style="clear:both;"></div>
