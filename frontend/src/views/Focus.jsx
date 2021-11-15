@@ -75,7 +75,7 @@ const Focus = () => {
                         {
                             [...tiempos.keys()].map ((indice) =>  {
                                 const Li = indice +1 === store.tiempo ? StyledLi : NormalLi;
-                                return (<Li> Tiempo de {tiempos[indice]} min. </Li>)
+                                return (<Li key={`${indice}`}> Tiempo de {tiempos[indice]} min. </Li>)
                             })
                         }
                     </ol>

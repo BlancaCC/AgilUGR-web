@@ -17,9 +17,9 @@ const StyledIconsOne = styled.div`
 `
 // necesisario sincronizar con el orden del lead 
 const IconView = [
-    {icon: GiDeskLamp, view: ViewURL.focus },
-    {icon: AiFillHome, view: ViewURL.profile },
-    {icon: IoIosStats, view: ViewURL.stats},
+    {icon: GiDeskLamp, view: ViewURL.focus, key: 1 },
+    {icon: AiFillHome, view: ViewURL.profile, key: 2 },
+    {icon: IoIosStats, view: ViewURL.stats, key: 3},
 ]
 const Icons = () => {
     // TODO add motion
@@ -35,8 +35,8 @@ const Icons = () => {
                         iconSize  = iconSmallSize
                     }
                     return (
-                        <StyledIconsOne>
-                            < e.icon size={iconSize} color={iconColor}/>
+                        <StyledIconsOne key={e.key}>
+                            < e.icon  size={iconSize} color={iconColor}/>
                         </StyledIconsOne>
                     )
                 }) 

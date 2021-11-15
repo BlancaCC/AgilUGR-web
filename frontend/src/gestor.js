@@ -1,4 +1,4 @@
-import { profileURL } from "./routesURL"
+import { focusURL, profileURL } from "./routesURL"
 /** 
 interface IState {
     vista: string, 
@@ -12,7 +12,7 @@ export const timeActionStates = {
     en_movimiento : 'EN-MOVIMIENTO',
 }
 export const initialStore = {
-    view: profileURL, // url de la vista
+    view: focusURL,//profileURL, // url de la vista
     counter: 0, //número de peticiones hechas 
     action: 0,  // refleja el estado el tiempo
     tiempo: 2, // indíce del vector de tiempo seleccionado
