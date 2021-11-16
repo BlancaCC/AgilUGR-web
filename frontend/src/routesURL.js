@@ -1,5 +1,5 @@
 // remote path
-export const appStateUrl = 'http://localhost:8000/'
+export const appStateUrl = 'http://localhost:8000/mariadb'
 
 //local path 
 export const profileURL =  '/profile'

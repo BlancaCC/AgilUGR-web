@@ -17,7 +17,7 @@ export const initialStore = {
     action: 0,  // refleja el estado el tiempo
     tiempo: 2, // indíce del vector de tiempo seleccionado
     // descomentar uno de timeAction para probarlo
-    timeAction: timeActionStates.en_movimiento//'SELECCIONADO',//'PARADO', // otra opción sería seleccionado 
+    time_action: timeActionStates.en_movimiento//'SELECCIONADO',//'PARADO', // otra opción sería seleccionado 
     // timeAction: 'PARADO',
 }
 //Acciones válidas que se le pasarán a la API

@@ -35,7 +35,7 @@ const Icons = () => {
                         iconSize  = iconSmallSize
                     }
                     return (
-                        <StyledIconsOne>
+                        <StyledIconsOne key={e.view}>
                             < e.icon size={iconSize} color={iconColor}/>
                         </StyledIconsOne>
                     )

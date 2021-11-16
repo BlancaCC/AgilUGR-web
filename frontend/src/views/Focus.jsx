@@ -61,9 +61,9 @@ const Focus = () => {
     const store = useContext(Store)
     const tiempos  = ['15', '30', '45', '60'] 
     let CReloj = Parado; 
-    if(timeActionStates.parado !== store.timeAction &&
+    if(timeActionStates.parado !== store.time_action &&
         tiempos.length >= store.tiempo){
-        CReloj = Tiempo(tiempos[store.tiempo -1], store.timeAction)
+        CReloj = Tiempo(tiempos[store.tiempo -1], store.time_action)
     }
             
     return (
@@ -75,7 +75,7 @@ const Focus = () => {
                         {
                             [...tiempos.keys()].map ((indice) =>  {
                                 const Li = indice +1 === store.tiempo ? StyledLi : NormalLi;
-                                return (<Li> Tiempo de {tiempos[indice]} min. </Li>)
+                                return (<Li key={indice}> Tiempo de {tiempos[indice]} min. </Li>)
                             })
                         }
                     </ol>
