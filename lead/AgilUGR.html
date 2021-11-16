@@ -32,6 +32,8 @@ See additional libraries, guides, and examples at:
 var VISTA = 'profile'
 var TIEMPO = 0
 var TIME_ACTION = 'PARADO'
+var OLD_TIME = TIEMPO;
+var OLD_ACTION = TIME_ACTION; 
 /*
    Asigna a cada vista un valor entero
 */
@@ -59,6 +61,7 @@ var controllerOptions = {enableGestures: true};
 
 // to use HMD mode:
 // controllerOptions.optimizeHMD = true;
+putData('view', 'stats')
 
 Leap.loop(controllerOptions, function(frame) {
   if (paused) {
@@ -281,11 +284,17 @@ Leap.loop(controllerOptions, function(frame) {
         TIME_ACTION="SELECCIONADO"
         datosTimeActionString = TIME_ACTION;
         timeActionOutput.innerHTML = "<div style='width:300px; float:left; padding:5px'>" + datosTimeActionString + "</div> </br>";
-        putData('action', TIME_ACTION)
+        if (OLD_ACTION !== TIME_ACTION){
+          putData('action', TIME_ACTION)
+          OLD_ACTION = TIME_ACTION
+        }
       }
     }
     tiempoOutput.innerHTML = "<div style='width:300px; float:left; padding:5px'>" + datosTiempoString + "</div> </br>";
-    putData('time', TIEMPO)
+    if(OLD_TIME !== TIEMPO){
+      putData('time', TIEMPO)
+      OLD_TIME = TIEMPO
+    }
 
     //CÓDIGO DEL TIME_ACTION
     
@@ -306,7 +315,10 @@ Leap.loop(controllerOptions, function(frame) {
           break;
       }
     }
-    putData('action', TIME_ACTION)
+    if (OLD_ACTION !== TIME_ACTION){
+      putData('action', TIME_ACTION)
+      OLD_ACTION = TIME_ACTION
+    }
     datosTimeActionString = TIME_ACTION;
     timeActionOutput.innerHTML = "<div style='width:300px; float:left; padding:5px'>" + datosTimeActionString + "</div> </br>";
   }

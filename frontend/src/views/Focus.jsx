@@ -48,7 +48,7 @@ const Tiempo = (tiempo, estado) => {
      `Quedan ${tiempo} min.`;
     const extra = estado === timeActionStates.seleccionado ? 
         'Dibuje un circulo para activa el reloj' 
-        : 'Cierre la mano para parar'; 
+        : 'Palma hacia abajo para parar'; 
     return (
     <ColumnFlexSpaceBetween>
         <h2> {mensaje} </h2>
@@ -62,8 +62,8 @@ const Focus = () => {
     const tiempos  = ['15', '30', '45', '60'] 
     let CReloj = Parado; 
     if(timeActionStates.parado !== store.time_action &&
-        tiempos.length >= store.tiempo){
-        CReloj = Tiempo(tiempos[store.tiempo -1], store.time_action)
+        tiempos.length >= store.indice_tiempo){
+        CReloj = Tiempo(tiempos[store.indice_tiempo -1], store.time_action)
     }
             
     return (
@@ -74,7 +74,7 @@ const Focus = () => {
                     <ol>
                         {
                             [...tiempos.keys()].map ((indice) =>  {
-                                const Li = indice +1 === store.tiempo ? StyledLi : NormalLi;
+                                const Li = indice +1 === store.indice_tiempo ? StyledLi : NormalLi;
                                 return (<Li key={indice}> Tiempo de {tiempos[indice]} min. </Li>)
                             })
                         }

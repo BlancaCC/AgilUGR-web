@@ -15,7 +15,7 @@ export const initialStore = {
     view: profileURL, // url de la vista
     counter: 0, //número de peticiones hechas 
     action: 0,  // refleja el estado el tiempo
-    tiempo: 2, // indíce del vector de tiempo seleccionado
+    indice_tiempo: 2, // indíce del vector de tiempo seleccionado
     // descomentar uno de timeAction para probarlo
     time_action: timeActionStates.en_movimiento//'SELECCIONADO',//'PARADO', // otra opción sería seleccionado 
     // timeAction: 'PARADO',

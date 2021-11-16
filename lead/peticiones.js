@@ -12,11 +12,13 @@ const putData = (route, data) => {
         .then(response => {
             const data = response.data;
             console.log(`PUT to ${custom_url}`, data);
+
+            //Para(`Se ha enviado ${custom_url}`)
         })
         .catch(error => alert(error));
 }
-const MuestraAlgo = () => {
-    alert('Hola esto es un mensae de prueba')
+const Para = (ms) => {
+    alert(ms)
 }
 //---------------- ----
 // Funciones con las que testear. Tienen sentido dentro del fichero pruebasPut.html 

@@ -54,7 +54,7 @@ UPDATE agil.webState SET
 SELECT * FROM agil.webState; 
 ```
 
-VAmos a localizar la dirección IP de nuestro contendor 
+Vamos a localizar la dirección IP de nuestro contenedor 
 ```
 docker inspect mariadbtest | grep 'IPAddress'
 ```

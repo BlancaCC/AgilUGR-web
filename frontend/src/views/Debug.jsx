@@ -12,7 +12,7 @@ const Debug = () => {
     <h2> La información que contiene el estado </h2>
     View: {store.view} <br/>
     Action: {store.action}  <br/>
-    Tiempo : {store.tiempo}  <br/>
+    Tiempo : {store.indice_tiempo}  <br/>
     timeAction : {store.timeAction}  (Valores posibles PARADO, SELECCIONADO)<br/>
     <br/>
     Los valores posibles de view:  <br/> 
