@@ -99,6 +99,132 @@ app.put('/leap/:view', (req, res)=>{
   })
   .catch(err => console.error(err))
 })
+// --------- backend con mariadb 
+
+const mariadb = require('mariadb');
+const pool = mariadb.createPool({
+     host: '172.17.0.2', 
+     user:'root', 
+     password: 'pass',
+     connectionLimit: 5
+});
+/** Función auxiliar de lectura de la base de datos */
+async function asyncFunctionGET(res) {
+  let conn;
+  try {
+	conn = await pool.getConnection();
+	const rows = await conn.query("SELECT * FROM agil.webState; ");
+  console.log(`Lee ${rows[0]}`)
+  res.send(rows[0])
+  } catch (err) {
+	throw err;
+  } finally {
+	if (conn) return conn.end();
+  }
+}
+async function asyncFunctionPUTView(view) {
+  let conn;
+  try {
+
+	conn = await pool.getConnection();
+
+	const res = await conn.query(
+    `UPDATE agil.webState SET 
+    view = '${view}'
+    WHERE id=1;`
+  );
+	// res: { affectedRows: 1, insertId: 1, warningStatus: 0 }
+
+  } catch (err) {
+	throw err;
+  } finally {
+	if (conn) conn.release(); //release to pool
+  }
+}
+
+async function asyncFunctionPUTTime(time) {
+  let conn;
+  try {
+
+	conn = await pool.getConnection();
+
+	const res = await conn.query(
+    `UPDATE agil.webState SET 
+    indice_tiempo = ${time}
+    WHERE id=1;`
+  );
+	// res: { affectedRows: 1, insertId: 1, warningStatus: 0 }
+
+  } catch (err) {
+	throw err;
+  } finally {
+	if (conn) conn.release(); //release to pool
+  }
+}
+
+async function asyncFunctionPUTAction(action) {
+  let conn;
+  try {
+
+	conn = await pool.getConnection();
+
+	const res = await conn.query(
+    `UPDATE agil.webState SET 
+    time_action = '${action}'
+    WHERE id=1;`
+  );
+	// res: { affectedRows: 1, insertId: 1, warningStatus: 0 }
+
+  } catch (err) {
+	throw err;
+  } finally {
+	if (conn) conn.release(); //release to pool
+  }
+}
+
+
+
+
+// lead lo que recibe
+app.get('/mariadb', (req, res)=>{
+  const {view} = req.params
+  // TODO control de la corrección 
+  asyncFunctionGET(res).then(obj => {
+    console.log(`Petición get Mariadb aceptada con éxito :D`)
+  })
+  .catch(err => console.error(err))
+})
+// vista 
+app.put('/mariadb/view/:view', (req, res)=>{
+  const {view} = req.params
+  asyncFunctionPUTView(view).then(obj => {
+  console.log(`PUT LEAD state: ${view}`)
+  res.send(`Put view updated ${view}`)
+  })
+  .catch(err => console.error(err))
+})
+// time
+app.put('/mariadb/time/:time', (req, res)=>{
+  const {time} = req.params
+  asyncFunctionPUTTime(time).then(obj => {
+  console.log(`PUT LEAD state: ${time}`)
+  res.send(`Put view updated ${time}`)
+  })
+  .catch(err => console.error(err))
+})
+
+app.put('/mariadb/action/:action', (req, res)=>{
+  const {action} = req.params
+  asyncFunctionPUTAction(action).then(obj => {
+  console.log(`PUT LEAD state: ${action}`)
+  res.send(`Put view updated ${action}`)
+  })
+  .catch(err => console.error(err))
+})
+
+
+
+
 
 // Esto es dónde escribe el puerto
 app.listen(port, () => {

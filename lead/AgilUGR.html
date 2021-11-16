@@ -24,6 +24,8 @@ See additional libraries, guides, and examples at:
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Leap Motion JavaScript Sample</title>
 <script src="http://js.leapmotion.com/leap-0.6.3.min.js"></script>
+<script src="../frontend/node_modules/axios/dist/axios.min.js"></script>
+<script src="peticiones.js"></script>
 <script>
 
 //--------------------nuestro------
@@ -62,7 +64,6 @@ Leap.loop(controllerOptions, function(frame) {
   if (paused) {
     return; // Skip this update
   }
-
   // Display Frame object data
   var frameOutput = document.getElementById("frameData");
 
@@ -259,13 +260,14 @@ Leap.loop(controllerOptions, function(frame) {
     datosVistaString = nueva_vista
     VISTA = nueva_vista
     lastChange = frame.timestamp
+    putData('view', VISTA)
     vistaOutput.innerHTML = "<div style='width:300px; float:left; padding:5px'>" + datosVistaString + "</div> </br>";
 
     }
   
     //CÓDIGO DEL TIEMPO
     var tiempoOutput = document.getElementById("tiempoData");
-    var datosTiempoString = "NO COMPUTABLE";
+    var datosTiempoString = null  ;
     const numeroDeDedos = NumeroDedosAbiertos (frame?.pointables)
     var timeActionOutput = document.getElementById("timeActionData");
     var datosTimeActionString=TIME_ACTION;
@@ -279,10 +281,11 @@ Leap.loop(controllerOptions, function(frame) {
         TIME_ACTION="SELECCIONADO"
         datosTimeActionString = TIME_ACTION;
         timeActionOutput.innerHTML = "<div style='width:300px; float:left; padding:5px'>" + datosTimeActionString + "</div> </br>";
+        putData('action', TIME_ACTION)
       }
     }
     tiempoOutput.innerHTML = "<div style='width:300px; float:left; padding:5px'>" + datosTiempoString + "</div> </br>";
-
+    putData('time', TIEMPO)
 
     //CÓDIGO DEL TIME_ACTION
     
@@ -303,10 +306,13 @@ Leap.loop(controllerOptions, function(frame) {
           break;
       }
     }
-
+    putData('action', TIME_ACTION)
     datosTimeActionString = TIME_ACTION;
     timeActionOutput.innerHTML = "<div style='width:300px; float:left; padding:5px'>" + datosTimeActionString + "</div> </br>";
   }
+  // Enviamos datos  a la base de datos  
+
+
     
 
   //.---------------------------------------------------------------

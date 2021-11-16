@@ -1,4 +1,4 @@
-var url = 'http://localhost:8000/'  
+var url = 'http://localhost:8000/mariadb/'  
 
 // Funciones a llamar en el fichero de leap
 /**
@@ -6,8 +6,8 @@ var url = 'http://localhost:8000/'
  * @param {*} data variable a enviar
  * @param {*} route a qué ruta se le hace el put
  */
-const putData = (data, route) => {
-    const custom_url = url +'general/'+ route + '/' + data
+const putData = (route, data) => {
+    const custom_url = url + route + '/' + data
     axios.put( custom_url) 
         .then(response => {
             const data = response.data;
@@ -28,11 +28,6 @@ var dedos = document.getElementById("dedos").value
 var tap = document.getElementById('tap').value 
 // actualizamos el contenido, haciendo peticiones de put
 
-/*
-putData(swipe, 'swipe')
-putData(dedos, 'dedos')
-putData(tap, 'tap')
-*/
 //refrescamos el contenido de la página
 axios.get(url)
 .then(response => {
@@ -43,4 +38,9 @@ axios.get(url)
 })
 .catch(error => console.error(error));
 };
+
+
+
+
+
 
