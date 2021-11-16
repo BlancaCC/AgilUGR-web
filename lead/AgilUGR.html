@@ -29,7 +29,7 @@ See additional libraries, guides, and examples at:
 //--------------------nuestro------
 var VISTA = 'profile'
 var TIEMPO = 0
-var TIME_ACTION = 'EN_MOVIMIENTO'
+var TIME_ACTION = 'PARADO'
 /*
    Asigna a cada vista un valor entero
 */
@@ -233,6 +233,9 @@ Leap.loop(controllerOptions, function(frame) {
   
   // -------------------------- nuestro ------------------------------
 
+
+  // CÓDIGO DE LA VISTA
+
   var vistaOutput = document.getElementById("vistaData");
   var datosVistaString;
   const indice = Indica(
@@ -240,8 +243,8 @@ Leap.loop(controllerOptions, function(frame) {
         frame?.pointables[2]?.direction[0],
         frame?.pointables[3]?.direction[0],
         frame?.pointables[4]?.direction[0]]);
-console.log(indice)
-  if ( indice !== 0 && Math.abs(frame.timestamp - lastChange) > TIMEOUT) {
+  console.log(indice)
+  if (indice !== 0 && Math.abs(frame.timestamp - lastChange) > TIMEOUT && TIME_ACTION !== "EN_MOVIMIENTO") {
 
     const indice_vista_actual = VISTAS_STRUCTURA[VISTA] 
 
@@ -260,6 +263,52 @@ console.log(indice)
 
     }
   
+    //CÓDIGO DEL TIEMPO
+    var tiempoOutput = document.getElementById("tiempoData");
+    var datosTiempoString = "NO COMPUTABLE";
+    const numeroDeDedos = NumeroDedosAbiertos (frame?.pointables)
+    var timeActionOutput = document.getElementById("timeActionData");
+    var datosTimeActionString=TIME_ACTION;
+    
+    if (VISTA === "focus") {
+      TIEMPO = numeroDeDedos
+      datosTiempoString = TIEMPO
+      
+      if (TIME_ACTION!== "EN_MOVIMIENTO" && numeroDeDedos!==0) {
+
+        TIME_ACTION="SELECCIONADO"
+        datosTimeActionString = TIME_ACTION;
+        timeActionOutput.innerHTML = "<div style='width:300px; float:left; padding:5px'>" + datosTimeActionString + "</div> </br>";
+      }
+    }
+    tiempoOutput.innerHTML = "<div style='width:300px; float:left; padding:5px'>" + datosTiempoString + "</div> </br>";
+
+
+    //CÓDIGO DEL TIME_ACTION
+    
+  if (frame.gestures.length > 0 && VISTA === "focus") {
+    for (var i = 0; i < frame.gestures.length; i++) {
+      var gesture = frame.gestures[i];
+
+      switch (gesture.type) {
+        case "circle":
+          TIME_ACTION = "EN_MOVIMIENTO";
+          break;
+        case "swipe":
+          if(Math.abs(gesture.direction[0])<0.3 && gesture.direction[1]<-0.5 && Math.abs(gesture.direction[2])<0.3) {
+            TIME_ACTION = "PARADO" + " direction: " + vectorToString(gesture.direction, 1);  
+          }                     
+          break;
+        default:
+          break;
+      }
+    }
+
+    datosTimeActionString = TIME_ACTION;
+    timeActionOutput.innerHTML = "<div style='width:300px; float:left; padding:5px'>" + datosTimeActionString + "</div> </br>";
+  }
+    
+
   //.---------------------------------------------------------------
   // Store frame for motion functions
   previousFrame = frame;
@@ -321,6 +370,37 @@ function Indica(array_puntos) {
 }
 
 
+// FUNCIONES PARA LOS DATOS DE TIEMPO
+
+/*
+    Computa si la media de los datos están apuntando al frente
+    Determina cuantos dedos están extendidos sobre el Leap
+    Actúa sobre la variable de estado "Tiempo"
+    Salida {NO-COMPUTABLE, 0,1,2,3,4,5}
+*/
+function NumeroDedosAbiertos (frame_pointables) {
+    var salida = 'NO-COMPUTABLE';
+    // tienen que estar apuntando al frente la media
+    if( 0 === Indica(
+    [frame_pointables[1]?.direction[0],
+    frame_pointables[2]?.direction[0],
+    frame_pointables[3]?.direction[0],
+    frame_pointables[4]?.direction[0]] )) {
+
+        // contmos los numeros de dedos extendidos 
+        var contador = 0;
+        for (var j = 0; j < frame_pointables.length; j++) {
+          if( frame_pointables[j]?.extended === true){
+            contador += 1;
+          }
+        }
+        salida = contador;
+    }
+    return salida 
+}
+
+
+
 // ------------------------
 
 
@@ -332,8 +412,12 @@ function Indica(array_puntos) {
   <button id="pause" onclick="togglePause()">Pause</button>
   <input type="checkbox" id="pauseOnGesture" onclick="pauseForGestures()">Pause on gesture</input>
   <h1>Nuestras variables de la app</h1>
-  <h3>Vista:</h3>
+  <p>Vista: </p>
   <div id="vistaData"></div>
+  <p>Tiempo (índice de tiempos posibles): </p>
+  <div id="tiempoData"></div>
+  <p>Time Action (activar/descativar alarma): </p>
+  <div id="timeActionData"></div>
   <br></br>
   -------------------------------
   <h3>Frame data:</h3>
